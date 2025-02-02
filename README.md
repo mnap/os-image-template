@@ -8,13 +8,15 @@ This repository is meant to be a template for building your own custom Universal
 - [Bluefin](https://projectbluefin.io/)
 - [uCore](https://projectucore.io/)
 - [main](https://github.com/ublue-os/main/)
-- [hwe](https://github.com/ublue-os/hwe/) 
+- [hwe](https://github.com/ublue-os/hwe/)
 
-This template includes a Containerfile and a Github workflow for building the container image. As soon as the workflow is enabled in your repository, it will build the container image and push it to the Github Container Registry.
+or any other base image if you want to start from scratch:
 
-# Community
+- Fedora: `quay.io/fedora/fedora-bootc:41`
+- CentOS Stream 9: `quay.io/centos-bootc/centos-bootc:stream9`
+- CentOS Stream 10 (in development): `quay.io/centos-bootc/centos-bootc:stream10`
 
-- [**bootc discussion forums**](https://github.com/containers/bootc/discussions) - Nothing in this template is ublue specific, the upstream bootc project has a discussions forum where custom image builders can hang out and ask questions.
+This template includes a Containerfile and a Github workflow for building the container image, signing, and proper metadata to be listed on [artifacthub](https://artifacthub.io/). As soon as the workflow is enabled in your repository, it will build the container image and push it to the Github Container Registry.
 
 # Prerequisites
 
@@ -42,6 +44,12 @@ This file defines the operations used to customize the selected image. It contai
 - change the upstream from which the custom image is derived
 - add additional RPM packages
 - add binaries as a layer from other images
+
+## Building an ISO
+
+Modify `iso.toml` to point to your custom image before generating an ISO.
+
+- (Steps in progress)
 
 ## Workflows
 
@@ -84,7 +92,13 @@ This provides users a method of verifying the image.
 
 4. Commit the `cosign.pub` file to the root of your git repository.
 
-### Examples
+# Community
+
+- [**bootc discussion forums**](https://github.com/containers/bootc/discussions) - Nothing in this template is ublue specific, the upstream bootc project has a discussions forum where custom image builders can hang out and ask questions.
+- Index your image on [artifacthub.io](https://artifacthub.io), use the `artifacthub-repo.yml` file at the root to verify yourself as the publisher. [Discussion thread](https://universal-blue.discourse.group/t/listing-your-custom-image-on-artifacthub/6446)
+
+## Community Examples
+
 - [m2os](https://github.com/m2giles/m2os)
 - [bos](https://github.com/bsherman/bos)
 - [homer](https://github.com/bketelsen/homer/)
